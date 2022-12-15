@@ -1,9 +1,21 @@
-let gameBoard = [];
+const gameObject = (() => {
+    const newGame = (rows, columns) => {
+        const gameArray= [];
+        return createBoard(gameArray, rows, columns);
+        // return gameArray;
+    }
+    return {
+        newGame,
+    }
+})();
 
-let rows = 3;
-let columns = 3;
+// gameObject.newGame(3, 3);
 
-function createRow(gameBoard, columns) {
+// let gameArray = [];
+// let rows = 3;
+// let columns = 3;
+
+function createRow(columns) {
     let rowArray = [];
     for (let i = 0; i <= columns - 1; i++) {
         rowArray[i] = new Object();
@@ -11,9 +23,11 @@ function createRow(gameBoard, columns) {
     return rowArray;
 }
 
-function createBoard(gameBoard, rows) {
+function createBoard(gameArray, rows, columns) {
     for (let i = 0; i <= rows - 1; i++) {
-        gameBoard[i] = createRow(gameBoard, columns);
+        gameArray[i] = createRow(columns);
     }
-    return gameBoard;
+    return gameArray;
 }
+// createBoard(gameArray, rows);
+// console.log(createBoard(gameArray, rows));
