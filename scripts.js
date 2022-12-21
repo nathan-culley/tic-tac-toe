@@ -1,7 +1,7 @@
 const gameObject = (() => {
-    const _newBoard = (rows, columns) => {
+    const _newBoard = () => {
         const boardArray= [];
-        return _createBoard(boardArray, rows, columns);
+        return _createBoard(boardArray, 3, 3);
     };
 
     function _createBoard(boardArray, rows, columns) {
@@ -23,8 +23,8 @@ const gameObject = (() => {
     // }
 
     return {
-        newBoard: function(rows, columns) {
-            return _newBoard(rows, columns);
+        newBoard: function() {
+            return _newBoard();
         },
         // getRow: function(row) {
         //     return _getRow(row);
@@ -32,7 +32,7 @@ const gameObject = (() => {
     }
 })();
 
-let currentBoard = gameObject.newBoard(3,3);
+let currentBoard = gameObject.newBoard();
 let turn = "x";
 
 console.table(currentBoard);
@@ -40,7 +40,7 @@ console.table(currentBoard);
 
 function newGame() {
     //create new board
-    currentBoard = gameObject.newBoard(3,3);
+    currentBoard = gameObject.newBoard();
     turn = "x";
     console.table(currentBoard);
     console.log(turn);
