@@ -38,9 +38,6 @@ const gameObject = (() => {
         newTurn: function() {
             return _newTurn();
         }
-        // getRow: function(row) {
-        //     return _getRow(row);
-        // },
     }
 })();
 
@@ -96,6 +93,10 @@ function displayBoard(board) {
             tableRow.appendChild(tableCol);
             tableCol.setAttribute("rownum", board.indexOf(row));
             tableCol.setAttribute("colnum", col);
+            tableCol.addEventListener("click", () => {
+                addMove(board.indexOf(row),col);
+            });
+
         }
     }
 }
