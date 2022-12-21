@@ -42,7 +42,8 @@ newGame();
 
 function newGame() {
     //create new board
-    currentBoard = gameObject.newBoard();
+    currentGame = Object.create(gameObject);
+    currentBoard = currentGame.newBoard();
     displayBoard(currentBoard);
     turn = "x";
     console.table(currentBoard);
