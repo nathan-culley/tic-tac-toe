@@ -115,3 +115,89 @@ function detectFill(row,col) {
         return false;
     }
 }
+
+function detectWin(currentBoard) {
+    console.table(currentBoard);
+    //loop through rows of currentBoard
+    for (let currentRow of currentBoard) {
+        //loop through columns of currentRow
+        for (let currentCol of currentRow) {
+            //does the square to the right have the same value?
+            if (checkRight(currentBoard.indexOf(currentRow), currentCol) == true) {
+                if (checkRight(currentBoard.indexOf(currentRow), currentCol + 1) == true) {
+                    return currentCol;
+                }
+            }
+            //does the square down and left have the same value?
+            if (checkDownLeft(currentBoard.indexOf(currentRow), currentCol) == true) {
+                if (checkDownLeft(currentBoard.indexOf(currentRow) +1, currentCol - 1) == true) {
+                    return currentCol;
+                }
+            }
+            //does the square straight down have the same value?
+            if (checkDown(currentBoard.indexOf(currentRow), currentCol) == true) {
+                if (checkDown(currentBoard.indexOf(currentRow) + 1, currentCol) == true) {
+                    return currentCol;
+                }
+            }
+            //does the square down and right have the same value?
+            if (checkDownRight(currentBoard.indexOf(currentRow), currentCol) == true) {
+                if (checkDownRight(currentBoard.indexOf(currentRow) + 1, currentCol + 1) == true) {
+                    return currentCol;
+                }
+            }
+        }
+    }
+}
+
+function checkRight(row, col) {
+    if (currentBoard[row][col + 1] == undefined) {
+        return false;
+    }
+    if (currentBoard[row][col] == currentBoard[row][col + 1]) {
+        console.log("match");
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+function checkDownLeft(row, col) {
+    if (currentBoard[row + 1][col - 1] == undefined) {
+        return false;
+    }
+    if (currentBoard[row][col] == currentBoard[row + 1][col - 1]) {
+        console.log("match");
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+function checkDown(row, col) {
+    if (currentBoard[row + 1][col] == undefined) {
+        return false;
+    }
+    if (currentBoard[row][col] == currentBoard[row + 1][col]) {
+        console.log("match");
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+function checkDownRight(row, col) {
+    if (currentBoard[row + 1][col + 1] == undefined) {
+        return false;
+    }
+    if (currentBoard[row][col] == currentBoard[row + 1][col + 1]) {
+        console.log("match");
+        return true;
+    }
+    else {
+        return false;
+    }
+}
