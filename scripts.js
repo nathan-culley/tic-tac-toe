@@ -32,18 +32,20 @@ const gameObject = (() => {
     }
 })();
 
-let currentBoard = gameObject.newBoard();
-let turn = "x";
+// let currentBoard = gameObject.newBoard();
+// let turn = "x";
 
-console.table(currentBoard);
+// console.table(currentBoard);
+
+newGame();
 
 
 function newGame() {
     //create new board
     currentBoard = gameObject.newBoard();
+    displayBoard(currentBoard);
     turn = "x";
     console.table(currentBoard);
-    console.log(turn);
 }
 
 function addMove(row,col) {
@@ -55,5 +57,23 @@ function addMove(row,col) {
         currentBoard[row][col] = "o";
         turn = "x";
     }
+    updateDisplay(row, col);
     console.table(currentBoard);
+}
+
+function displayBoard(board) {
+    const boardTable = document.getElementById("board");
+    //cycle through rows
+    for (let row of board) {
+        //create row within board
+        const tableRow = document.createElement("tr");
+        boardTable.appendChild(tableRow);
+        //cycle through columns and create td within row
+        for (let col of row) {
+            const tableCol = document.createElement("td");
+            tableRow.appendChild(tableCol);
+            tableCol.setAttribute("rowNum", board.indexOf(row));
+            tableCol.setAttribute("colNum", col);
+        }
+    }
 }
