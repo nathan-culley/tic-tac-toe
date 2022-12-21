@@ -1,45 +1,59 @@
 const gameObject = (() => {
     const _newBoard = (rows, columns) => {
-        const gameArray= [];
-        return _createBoard(gameArray, rows, columns);
+        const boardArray= [];
+        return _createBoard(boardArray, rows, columns);
     };
 
-    function _createBoard(gameArray, rows, columns) {
+    function _createBoard(boardArray, rows, columns) {
         for (let i = 0; i <= rows - 1; i++) {
-            gameArray[i] = _createRow(columns);
+            boardArray[i] = _createRow(columns, i);
         }
-        return gameArray;
+        return boardArray;
     }
     function _createRow(columns) {
         let rowArray = [];
         for (let i = 0; i <= columns - 1; i++) {
-            rowArray[i] = new Object();
+            rowArray[i] = new String(i);
         }
         return rowArray;
     }
-    function _getSquare(row, col) {
-        return "hello";
-    }
+    // function _getRow(row) {
+    //     console.log(_newBoard(row));
+    //     return "hello";
+    // }
 
     return {
-        newGame: function(rows, columns) {
+        newBoard: function(rows, columns) {
             return _newBoard(rows, columns);
         },
-        getSquare: function(row, col) {
-            return _getSquare(row, col);
-        },
+        // getRow: function(row) {
+        //     return _getRow(row);
+        // },
     }
 })();
 
-console.log(gameObject.newGame(3, 3));
-console.log(gameObject.getSquare());
+let currentBoard = gameObject.newBoard(3,3);
+let turn = "x";
 
-// let gameArray = [];
-// let rows = 3;
-// let columns = 3;
+console.table(currentBoard);
 
 
+function newGame() {
+    //create new board
+    currentBoard = gameObject.newBoard(3,3);
+    turn = "x";
+    console.table(currentBoard);
+    console.log(turn);
+}
 
-
-// createBoard(gameArray, rows);
-// console.log(createBoard(gameArray, rows));
+function addMove(row,col) {
+    if (turn == "x") {
+        currentBoard[row][col] = "x";
+        turn = "o";
+    }
+    else {
+        currentBoard[row][col] = "o";
+        turn = "x";
+    }
+    console.table(currentBoard);
+}
