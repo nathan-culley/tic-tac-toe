@@ -49,6 +49,10 @@ function newGame() {
 }
 
 function addMove(row,col) {
+    if (detectFill(row, col) == true) {
+        alert("Square already taken");
+        return;
+    }
     if (turn == "x") {
         currentBoard[row][col] = "x";
         updateDisplay(row, col, turn);
@@ -85,4 +89,13 @@ function updateDisplay(row, col, turn) {
     const selection = document.querySelector(`[rownum='${row}'] [colnum='${col}']`);
     console.log(selection);
     selection.innerHTML = turn;
+}
+
+function detectFill(row,col) {
+    if (currentBoard[row][col] == "x" | currentBoard[row][col] == "o") {
+        return true;
+    }
+    else {
+        return false;
+    }
 }
