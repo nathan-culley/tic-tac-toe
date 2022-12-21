@@ -51,13 +51,15 @@ function newGame() {
 function addMove(row,col) {
     if (turn == "x") {
         currentBoard[row][col] = "x";
+        updateDisplay(row, col, turn);
         turn = "o";
     }
     else {
         currentBoard[row][col] = "o";
+        updateDisplay(row, col, turn);
         turn = "x";
     }
-    updateDisplay(row, col);
+    
     console.table(currentBoard);
 }
 
@@ -67,13 +69,20 @@ function displayBoard(board) {
     for (let row of board) {
         //create row within board
         const tableRow = document.createElement("tr");
+        tableRow.setAttribute("rownum", board.indexOf(row));
         boardTable.appendChild(tableRow);
         //cycle through columns and create td within row
         for (let col of row) {
             const tableCol = document.createElement("td");
             tableRow.appendChild(tableCol);
-            tableCol.setAttribute("rowNum", board.indexOf(row));
-            tableCol.setAttribute("colNum", col);
+            tableCol.setAttribute("rownum", board.indexOf(row));
+            tableCol.setAttribute("colnum", col);
         }
     }
+}
+
+function updateDisplay(row, col, turn) {
+    const selection = document.querySelector(`[rownum='${row}'] [colnum='${col}']`);
+    console.log(selection);
+    selection.innerHTML = turn;
 }
