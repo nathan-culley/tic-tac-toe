@@ -17,6 +17,16 @@ const gameObject = (() => {
         }
         return rowArray;
     }
+    let _turn = "X";
+    function _newTurn() {
+        if (_turn == "X") {
+            _turn = "O";
+        }
+        else {
+            _turn = "X";
+        }
+        return _turn;
+    }
     // function _getRow(row) {
     //     console.log(_newBoard(row));
     //     return "hello";
@@ -26,6 +36,12 @@ const gameObject = (() => {
         newBoard: function() {
             return _newBoard();
         },
+        getTurn: function() {
+            return _turn;
+        },
+        newTurn: function() {
+            return _newTurn();
+        }
         // getRow: function(row) {
         //     return _getRow(row);
         // },
@@ -33,7 +49,7 @@ const gameObject = (() => {
 })();
 
 // let currentBoard = gameObject.newBoard();
-// let turn = "x";
+// let turn = "X";
 
 // console.table(currentBoard);
 
@@ -41,11 +57,13 @@ newGame();
 
 
 function newGame() {
+    //remove currently-displayed table on page
+    
     //create new board
     currentGame = Object.create(gameObject);
     currentBoard = currentGame.newBoard();
     displayBoard(currentBoard);
-    turn = "x";
+    console.log(currentGame.getTurn());
     console.table(currentBoard);
 }
 
@@ -54,15 +72,17 @@ function addMove(row,col) {
         alert("Square already taken");
         return;
     }
-    if (turn == "x") {
-        currentBoard[row][col] = "x";
-        updateDisplay(row, col, turn);
-        turn = "o";
+    if (currentGame.getTurn() == "X") {
+        currentBoard[row][col] = "X";
+        updateDisplay(row, col, currentGame.getTurn());
+        currentGame.newTurn();
+        
     }
     else {
-        currentBoard[row][col] = "o";
-        updateDisplay(row, col, turn);
-        turn = "x";
+        currentBoard[row][col] = "O";
+        updateDisplay(row, col, currentGame.getTurn());
+        currentGame.newTurn();
+        
     }
     
     console.table(currentBoard);
@@ -93,7 +113,7 @@ function updateDisplay(row, col, turn) {
 }
 
 function detectFill(row,col) {
-    if (currentBoard[row][col] == "x" | currentBoard[row][col] == "o") {
+    if (currentBoard[row][col] == "X" | currentBoard[row][col] == "O") {
         return true;
     }
     else {
