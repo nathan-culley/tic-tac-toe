@@ -27,10 +27,6 @@ const gameObject = (() => {
         }
         return _turn;
     }
-    // function _getRow(row) {
-    //     console.log(_newBoard(row));
-    //     return "hello";
-    // }
 
     return {
         newBoard: function() {
@@ -48,17 +44,15 @@ const gameObject = (() => {
     }
 })();
 
-// let currentBoard = gameObject.newBoard();
-// let turn = "X";
-
-// console.table(currentBoard);
-
 newGame();
 
 
 function newGame() {
     //remove currently-displayed table on page
-    
+    const boardTable = document.getElementById("board");
+    while (boardTable.firstChild) {
+        boardTable.removeChild(boardTable.firstChild);
+    }
     //create new board
     currentGame = Object.create(gameObject);
     currentBoard = currentGame.newBoard();
