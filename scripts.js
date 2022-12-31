@@ -122,27 +122,37 @@ function detectWin(currentBoard) {
     for (let currentRow of currentBoard) {
         //loop through columns of currentRow
         for (let currentCol of currentRow) {
+            let rowNum = currentBoard.indexOf(currentRow);
+            let colNum = +currentCol;
             //does the square to the right have the same value?
-            if (checkRight(currentBoard.indexOf(currentRow), currentCol) == true) {
-                if (checkRight(currentBoard.indexOf(currentRow), currentCol + 1) == true) {
+            if (checkRight(rowNum, colNum) == true) {
+                console.log("2");
+                if (checkRight(rowNum, colNum + 1) == true) {
+                    console.log("3");
                     return currentCol;
                 }
             }
             //does the square down and left have the same value?
-            if (checkDownLeft(currentBoard.indexOf(currentRow), currentCol) == true) {
-                if (checkDownLeft(currentBoard.indexOf(currentRow) +1, currentCol - 1) == true) {
+            if (checkDownLeft(rowNum, colNum) == true) {
+                console.log("2");
+                if (checkDownLeft(rowNum +1, colNum - 1) == true) {
+                    console.log("3");
                     return currentCol;
                 }
             }
             //does the square straight down have the same value?
-            if (checkDown(currentBoard.indexOf(currentRow), currentCol) == true) {
-                if (checkDown(currentBoard.indexOf(currentRow) + 1, currentCol) == true) {
+            if (checkDown(rowNum, colNum) == true) {
+                console.log("2");
+                if (checkDown(rowNum + 1, colNum) == true) {
+                    console.log("3");
                     return currentCol;
                 }
             }
             //does the square down and right have the same value?
-            if (checkDownRight(currentBoard.indexOf(currentRow), currentCol) == true) {
-                if (checkDownRight(currentBoard.indexOf(currentRow) + 1, currentCol + 1) == true) {
+            if (checkDownRight(rowNum, colNum) == true) {
+                console.log("2");
+                if (checkDownRight(rowNum + 1, colNum + 1) == true) {
+                    console.log("3");
                     return currentCol;
                 }
             }
@@ -151,53 +161,75 @@ function detectWin(currentBoard) {
 }
 
 function checkRight(row, col) {
-    if (currentBoard[row][col + 1] == undefined) {
-        return false;
-    }
-    if (currentBoard[row][col] == currentBoard[row][col + 1]) {
-        console.log("match");
-        return true;
+
+    if ((0 <= row <= 2) && (0 <= (col + 1) <= 2)) {
+        console.log("valid square");
+        if (currentBoard[row][col] == currentBoard[row][col + 1]) {
+            console.log("match");
+            return true;
+        }
+        else {
+            return false;
+        }
     }
     else {
+        console.log("invalid square");
         return false;
     }
 }
 
 function checkDownLeft(row, col) {
-    if (currentBoard[row + 1][col - 1] == undefined) {
-        return false;
-    }
-    if (currentBoard[row][col] == currentBoard[row + 1][col - 1]) {
-        console.log("match");
-        return true;
+
+    if ((0 <= (row + 1) <= 2) && (0 <= (col - 1) <= 2)) {
+        console.log("valid square");
+        if (currentBoard[row][col] == currentBoard[row + 1][col - 1]) {
+            console.log("match");
+            return true;
+        }
+        else {
+            return false;
+        }
     }
     else {
+        console.log("invalid square");
         return false;
     }
 }
 
 function checkDown(row, col) {
-    if (currentBoard[row + 1][col] == undefined) {
-        return false;
-    }
-    if (currentBoard[row][col] == currentBoard[row + 1][col]) {
-        console.log("match");
-        return true;
+    console.log(row+1,col)
+    if ((0 <= (row + 1) <= 2) && (0 <= col <= 2)) {
+        console.log("valid square");
+        if (currentBoard[row][col] == currentBoard[row + 1][col]) {
+            console.log("match");
+            return true;
+        }
+        else {
+            return false;
+        }
     }
     else {
+        console.log("invalid square");
         return false;
     }
 }
 
 function checkDownRight(row, col) {
-    if (currentBoard[row + 1][col + 1] == undefined) {
-        return false;
-    }
-    if (currentBoard[row][col] == currentBoard[row + 1][col + 1]) {
-        console.log("match");
-        return true;
+
+    if ((0 <= (row + 1) <= 2) && (0 <= (col + 1) <= 2)) {
+        console.log("valid square");
+        if (currentBoard[row][col] == currentBoard[row + 1][col + 1]) {
+            console.log("match");
+            return true;
+        }
+        else {
+            return false;
+        }
     }
     else {
+        console.log("invalid square");
         return false;
     }
 }
+
+//YOU'RE GETTING TYPEERRORS. CONSIDER MAKING SURE THAT YOUR ROW AND COL VALUES ARE ACTUALLY NUMBERS. THIS MAY BE WHY YOU'RE HAVING TROUBLE WHENEVER CHECKDOWNLEFT REFERS TO [COL - 1];
