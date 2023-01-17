@@ -63,17 +63,22 @@ function addMove(row,col) {
         alert("Square already taken");
         return;
     }
-    if (currentGame.getTurn() == "X") {
-        currentBoard[row][col] = "X";
-        updateDisplay(row, col, currentGame.getTurn());
-        currentGame.newTurn();
-        
-    }
-    else {
-        currentBoard[row][col] = "O";
-        updateDisplay(row, col, currentGame.getTurn());
-        currentGame.newTurn();
-        
+
+    currentBoard[row][col] = currentGame.getTurn();
+    // if (currentGame.getTurn() == "X") {
+    //     currentBoard[row][col] = "X";    
+    // }
+    // else {
+    //     currentBoard[row][col] = "O";      
+    // }
+    updateDisplay(row, col, currentGame.getTurn());
+    currentGame.newTurn();
+
+    if (detectWin(currentBoard) == true) {
+        const victoryMessage = document.createElement("p");
+        victoryMessage.innerHTML = "Victory!";
+        const boardTable = document.getElementById("board");
+        insertAfter(boardTable, victoryMessage);
     }
     
     console.table(currentBoard);
@@ -187,3 +192,7 @@ function detectWinDiag(currentBoard) {
     }
 
 }
+
+function insertAfter(referenceNode, newNode) {
+    referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+  }
