@@ -118,33 +118,72 @@ function detectFill(row,col) {
 
 
 function detectWin(currentBoard) {
-    //loop through each row of currentBoard
+    //check if a player has three in a row
 
-        //loop through each column of currentRow
+    if (detectWinRow(currentBoard) == true) {
+        return true;
+    }
 
-            //check if the current square matches the one to its right
+    //check if a player has three in a column
 
-                //if it does, check if that right-hand square matches the one to its right.
+    if (detectWinCol(currentBoard) == true) {
+        return true;
+    }
 
-                    //if it does, declare victory for whichever player owns those squares
+    //check if a player has three in a diagonal
 
-            //check if the current square matches the one to its bottom left
+    if (detectWinDiag(currentBoard) == true) {
+        return true;
+    }
 
-                //if it does, check if that bottom-left square matches the one to its bottom left.
-
-                    //if it does, declare victory for whichever player owns those squares
-
-            //check if the current square matches the one to its bottom
-            
-                //if it does, check if that bottom square matches the one to its bottom.
-
-                    //if it does, declare victory for whichever player owns those squares
-
-            //check if the current square matches the one to its bottom right
-            
-                //if it does, check if that bottom-right square matches the one to its bottom right.
-
-                    //if it does, declare victory for whichever player owns those squares
+    return false;
 }
 
-//YOU'RE GETTING TYPEERRORS. CONSIDER MAKING SURE THAT YOUR ROW AND COL VALUES ARE ACTUALLY NUMBERS. THIS MAY BE WHY YOU'RE HAVING TROUBLE WHENEVER CHECKDOWNLEFT REFERS TO [COL - 1];
+function detectWinRow(currentBoard) {
+    //loop through rows of currentBoard
+     for (let currentRow of currentBoard) {
+        console.log(currentRow);
+        console.log(currentRow[0]);
+        console.log(currentRow[1]);
+        console.log(currentRow[2]);
+        if (currentRow[0] == currentRow[1] & currentRow[0] == currentRow[2]) {
+            console.log("row equal");
+            if (currentRow[0,1,2] == 'X' | currentRow[0,1,2] == 'O') {
+                console.log("Win by row");
+                return true;
+            }           
+        }
+     }
+}
+
+function detectWinCol(currentBoard) {
+    for (let i = 0; i < 2; i++) {
+        
+        if (currentBoard[0][i] == currentBoard[1][i] & currentBoard[0][i] == currentBoard[2][i]) {
+            if (currentBoard[0][i] == 'X' | currentBoard[0][i] == 'O') {
+                console.log("Win by column");
+                return true;
+            }
+        }
+    }
+}
+
+function detectWinDiag(currentBoard) {
+    //check down and right
+    if (currentBoard[0][0] == currentBoard[1][1] & currentBoard[0][0] == currentBoard[2][2]) {
+        if (currentBoard [0][0] == 'X' | currentBoard [0][0] == 'O') {
+            console.log("Win by diagonal");
+            return true;
+        }
+        
+    }
+
+    //check down and left
+    if (currentBoard[0][2] == currentBoard[1][1] & currentBoard [0][2] == currentBoard[2][0]) {
+        if (currentBoard [0][0] == 'X' | currentBoard [0][0] == 'O') {
+        console.log("Win by diagonal");
+        return true;
+        }
+    }
+
+}
