@@ -43,6 +43,10 @@ const gameObject = (() => {
 
 newGame();
 
+const resetButton = document.getElementById("reset-button");
+resetButton.addEventListener("click", () => {
+    newGame();
+});
 
 function newGame() {
     //remove currently-displayed table on page
@@ -77,8 +81,8 @@ function addMove(row,col) {
         const victoryMessage = document.createElement("p");
         victoryMessage.setAttribute('id','victory-message');
         victoryMessage.innerHTML = "Victory! " + detectWin(currentBoard) + " wins.";
-        const boardTable = document.getElementById("board");
-        insertAfter(boardTable, victoryMessage);
+        // const resetButton = document.getElementById("reset-button");
+        insertAfter(resetButton, victoryMessage);
     }
     
     console.table(currentBoard);
