@@ -116,120 +116,35 @@ function detectFill(row,col) {
     }
 }
 
-// function detectWin(currentBoard) {
-//     console.table(currentBoard);
-//     //loop through rows of currentBoard
-//     for (let currentRow of currentBoard) {
-//         //loop through columns of currentRow
-//         for (let currentCol of currentRow) {
-//             let rowNum = currentBoard.indexOf(currentRow);
-//             let colNum = +currentCol;
-//             //does the square to the right have the same value?
-//             if (checkRight(rowNum, colNum) == true) {
-//                 console.log("2");
-//                 if (checkRight(rowNum, colNum + 1) == true) {
-//                     console.log("3");
-//                     return currentCol;
-//                 }
-//             }
-//             //does the square down and left have the same value?
-//             if (checkDownLeft(rowNum, colNum) == true) {
-//                 console.log("2");
-//                 if (checkDownLeft(rowNum +1, colNum - 1) == true) {
-//                     console.log("3");
-//                     return currentCol;
-//                 }
-//             }
-//             //does the square straight down have the same value?
-//             if (checkDown(rowNum, colNum) == true) {
-//                 console.log("2");
-//                 if (checkDown(rowNum + 1, colNum) == true) {
-//                     console.log("3");
-//                     return currentCol;
-//                 }
-//             }
-//             //does the square down and right have the same value?
-//             if (checkDownRight(rowNum, colNum) == true) {
-//                 console.log("2");
-//                 if (checkDownRight(rowNum + 1, colNum + 1) == true) {
-//                     console.log("3");
-//                     return currentCol;
-//                 }
-//             }
-//         }
-//     }
-// }
 
-// function checkRight(row, col) {
+function detectWin(currentBoard) {
+    //loop through each row of currentBoard
 
-//     if ((0 <= row <= 2) && (0 <= (col + 1) <= 2)) {
-//         console.log("valid square");
-//         if (currentBoard[row][col] == currentBoard[row][col + 1]) {
-//             console.log("match");
-//             return true;
-//         }
-//         else {
-//             return false;
-//         }
-//     }
-//     else {
-//         console.log("invalid square");
-//         return false;
-//     }
-// }
+        //loop through each column of currentRow
 
-// function checkDownLeft(row, col) {
+            //check if the current square matches the one to its right
 
-//     if ((0 <= (row + 1) <= 2) && (0 <= (col - 1) <= 2)) {
-//         console.log("valid square");
-//         if (currentBoard[row][col] == currentBoard[row + 1][col - 1]) {
-//             console.log("match");
-//             return true;
-//         }
-//         else {
-//             return false;
-//         }
-//     }
-//     else {
-//         console.log("invalid square");
-//         return false;
-//     }
-// }
+                //if it does, check if that right-hand square matches the one to its right.
 
-// function checkDown(row, col) {
-//     console.log(row+1,col)
-//     if ((0 <= (row + 1) <= 2) && (0 <= col <= 2)) {
-//         console.log("valid square");
-//         if (currentBoard[row][col] == currentBoard[row + 1][col]) {
-//             console.log("match");
-//             return true;
-//         }
-//         else {
-//             return false;
-//         }
-//     }
-//     else {
-//         console.log("invalid square");
-//         return false;
-//     }
-// }
+                    //if it does, declare victory for whichever player owns those squares
 
-// function checkDownRight(row, col) {
+            //check if the current square matches the one to its bottom left
 
-//     if ((0 <= (row + 1) <= 2) && (0 <= (col + 1) <= 2)) {
-//         console.log("valid square");
-//         if (currentBoard[row][col] == currentBoard[row + 1][col + 1]) {
-//             console.log("match");
-//             return true;
-//         }
-//         else {
-//             return false;
-//         }
-//     }
-//     else {
-//         console.log("invalid square");
-//         return false;
-//     }
-// }
+                //if it does, check if that bottom-left square matches the one to its bottom left.
+
+                    //if it does, declare victory for whichever player owns those squares
+
+            //check if the current square matches the one to its bottom
+            
+                //if it does, check if that bottom square matches the one to its bottom.
+
+                    //if it does, declare victory for whichever player owns those squares
+
+            //check if the current square matches the one to its bottom right
+            
+                //if it does, check if that bottom-right square matches the one to its bottom right.
+
+                    //if it does, declare victory for whichever player owns those squares
+}
 
 //YOU'RE GETTING TYPEERRORS. CONSIDER MAKING SURE THAT YOUR ROW AND COL VALUES ARE ACTUALLY NUMBERS. THIS MAY BE WHY YOU'RE HAVING TROUBLE WHENEVER CHECKDOWNLEFT REFERS TO [COL - 1];
