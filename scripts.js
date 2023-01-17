@@ -47,8 +47,12 @@ newGame();
 function newGame() {
     //remove currently-displayed table on page
     const boardTable = document.getElementById("board");
+    const victoryMessage = document.getElementById("victory-message");
     while (boardTable.firstChild) {
         boardTable.removeChild(boardTable.firstChild);
+    }
+    if (victoryMessage) {
+        victoryMessage.remove();
     }
     //create new board
     currentGame = Object.create(gameObject);
@@ -65,17 +69,13 @@ function addMove(row,col) {
     }
 
     currentBoard[row][col] = currentGame.getTurn();
-    // if (currentGame.getTurn() == "X") {
-    //     currentBoard[row][col] = "X";    
-    // }
-    // else {
-    //     currentBoard[row][col] = "O";      
-    // }
+
     updateDisplay(row, col, currentGame.getTurn());
     currentGame.newTurn();
 
     if (detectWin(currentBoard) == true) {
         const victoryMessage = document.createElement("p");
+        victoryMessage.setAttribute('id','victory-message');
         victoryMessage.innerHTML = "Victory!";
         const boardTable = document.getElementById("board");
         insertAfter(boardTable, victoryMessage);
