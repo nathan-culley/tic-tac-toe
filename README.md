@@ -4,6 +4,7 @@ To-Do List:
 
 - Add option to input names
 - Fix game logic and usage of private functions
+- Add check for when board is full and end game
 - Reset first player to X with each new game
 - Prevent new moves from being added after a player wins
 - Add styling

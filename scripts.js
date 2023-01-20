@@ -49,7 +49,7 @@ const gameObject = (() => {
         }
     }
     function _addMove(row,col) {
-        if (detectFill(row, col) == true) {
+        if (_detectFill(row, col) == true) {
             alert("Square already taken");
             return;
         }
@@ -73,6 +73,14 @@ const gameObject = (() => {
         const selection = document.querySelector(`[rownum='${row}'] [colnum='${col}']`);
         console.log(selection);
         selection.innerHTML = turn;
+    }
+    function _detectFill(row,col) {
+        if (currentBoard[row][col] == "X" | currentBoard[row][col] == "O") {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     return {
@@ -117,19 +125,6 @@ function newGame() {
 }
 
 
-
-
-
-
-
-function detectFill(row,col) {
-    if (currentBoard[row][col] == "X" | currentBoard[row][col] == "O") {
-        return true;
-    }
-    else {
-        return false;
-    }
-}
 
 
 function detectWin(currentBoard) {
