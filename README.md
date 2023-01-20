@@ -4,5 +4,8 @@ To-Do List:
 
 - Add option to input names
 - Fix game logic and usage of private functions
+- Reset first player to X with each new game
+- Prevent new moves from being added after a player wins
 - Add styling
 - Add AI for player to play against
+- Fix victory check to make sure the right player is being declared winner.

@@ -42,11 +42,32 @@ const gameObject = (() => {
                 tableCol.setAttribute("rownum", board.indexOf(row));
                 tableCol.setAttribute("colnum", col);
                 tableCol.addEventListener("click", () => {
-                    addMove(board.indexOf(row),col);
+                    _addMove(board.indexOf(row),col);
                 });
     
             }
         }
+    }
+    function _addMove(row,col) {
+        if (detectFill(row, col) == true) {
+            alert("Square already taken");
+            return;
+        }
+    
+        currentBoard[row][col] = currentGame.getTurn();
+    
+        updateDisplay(row, col, currentGame.getTurn());
+        currentGame.newTurn();
+    
+        if (detectWin(currentBoard) != false) {
+            const victoryMessage = document.createElement("p");
+            victoryMessage.setAttribute('id','victory-message');
+            victoryMessage.innerHTML = "Victory! " + detectWin(currentBoard) + " wins.";
+            // const resetButton = document.getElementById("reset-button");
+            insertAfter(resetButton, victoryMessage);
+        }
+        
+        console.table(currentBoard);
     }
 
     return {
@@ -90,27 +111,7 @@ function newGame() {
     console.table(currentBoard);
 }
 
-function addMove(row,col) {
-    if (detectFill(row, col) == true) {
-        alert("Square already taken");
-        return;
-    }
 
-    currentBoard[row][col] = currentGame.getTurn();
-
-    updateDisplay(row, col, currentGame.getTurn());
-    currentGame.newTurn();
-
-    if (detectWin(currentBoard) != false) {
-        const victoryMessage = document.createElement("p");
-        victoryMessage.setAttribute('id','victory-message');
-        victoryMessage.innerHTML = "Victory! " + detectWin(currentBoard) + " wins.";
-        // const resetButton = document.getElementById("reset-button");
-        insertAfter(resetButton, victoryMessage);
-    }
-    
-    console.table(currentBoard);
-}
 
 
 
