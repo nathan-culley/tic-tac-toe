@@ -59,7 +59,7 @@ const gameObject = (() => {
         _updateDisplay(row, col, currentGame.getTurn());
         currentGame.newTurn();
     
-        if (detectWin(currentBoard) != false) {
+        if (_detectWin(currentBoard) != false) {
             _endGame();
         }
         
@@ -67,14 +67,14 @@ const gameObject = (() => {
     }
     function _endGame() {
         
-        if (detectWin(currentBoard) == 'X' | detectWin(currentBoard) == 'O') {
+        if (_detectWin(currentBoard) == 'X' | _detectWin(currentBoard) == 'O') {
             const victoryMessage = document.createElement("p");
             victoryMessage.setAttribute('id','victory-message');
-            victoryMessage.innerHTML = "Victory! " + detectWin(currentBoard) + " wins.";
+            victoryMessage.innerHTML = "Victory! " + _detectWin(currentBoard) + " wins.";
             // const resetButton = document.getElementById("reset-button");
             insertAfter(resetButton, victoryMessage);
         }
-        if (detectWin(currentBoard) == 'draw') {
+        if (_detectWin(currentBoard) == 'draw') {
             const victoryMessage = document.createElement("p");
             victoryMessage.setAttribute('id','victory-message');
             victoryMessage.innerHTML = "Game is a draw. Play again?";
@@ -97,6 +97,91 @@ const gameObject = (() => {
         else {
             return false;
         }
+    }
+
+    function _detectWin(currentBoard) {
+        //check if a player has three in a row
+    
+        if (_detectWinRow(currentBoard) != false) {
+            return _detectWinRow(currentBoard);
+        }
+    
+        //check if a player has three in a column
+    
+        if (_detectWinCol(currentBoard) != false) {
+            return _detectWinCol(currentBoard);
+        }
+    
+        //check if a player has three in a diagonal
+    
+        if (_detectWinDiag(currentBoard) != false) {
+            return _detectWinDiag(currentBoard);
+        }
+        if (detectDraw(currentBoard) != false) {
+            return detectDraw(currentBoard);
+        }
+        return false;
+    }
+    
+    function _detectWinRow(currentBoard) {
+        //loop through rows of currentBoard
+         for (let currentRow of currentBoard) {
+    
+            if (currentRow[0] == currentRow[1] & currentRow[0] == currentRow[2]) {
+                console.log("row equal");
+                if (currentRow[0,1,2] == 'X' | currentRow[0,1,2] == 'O') {
+                    console.log("Win by row");
+                    return currentRow[0];
+                }           
+            }
+         }
+        return false;
+    }
+    
+    function _detectWinCol(currentBoard) {
+        for (let i = 0; i < 2; i++) {
+            
+            if (currentBoard[0][i] == currentBoard[1][i] & currentBoard[0][i] == currentBoard[2][i]) {
+                if (currentBoard[0][i] == 'X' | currentBoard[0][i] == 'O') {
+                    console.log("Win by column");
+                    return currentBoard[0][i];
+                }
+            }
+        }
+        return false;
+    }
+    
+    function _detectWinDiag(currentBoard) {
+        //check down and right
+        if (currentBoard[0][0] == currentBoard[1][1] & currentBoard[0][0] == currentBoard[2][2]) {
+            if (currentBoard [0][0] == 'X' | currentBoard [0][0] == 'O') {
+                console.log("Win by diagonal");
+                return currentBoard [0][0];
+            }
+        }
+    
+        //check down and left
+        if (currentBoard[0][2] == currentBoard[1][1] & currentBoard [0][2] == currentBoard[2][0]) {
+            if (currentBoard [0][0] == 'X' | currentBoard [0][0] == 'O') {
+            console.log("Win by diagonal");
+            return currentBoard[0][0];
+            }
+        }
+        return false;
+    }
+    
+    function detectDraw(currentBoard) {
+        for (let currentRow of currentBoard) {
+            for (let currentSquare of currentRow) {
+                if (currentSquare == 'X' | currentSquare == 'O') {
+                    continue;
+                }
+                else {
+                    return false;
+                }
+            }
+        }
+        return 'draw';
     }
 
     return {
@@ -143,90 +228,7 @@ function newGame() {
 
 
 
-function detectWin(currentBoard) {
-    //check if a player has three in a row
 
-    if (detectWinRow(currentBoard) != false) {
-        return detectWinRow(currentBoard);
-    }
-
-    //check if a player has three in a column
-
-    if (detectWinCol(currentBoard) != false) {
-        return detectWinCol(currentBoard);
-    }
-
-    //check if a player has three in a diagonal
-
-    if (detectWinDiag(currentBoard) != false) {
-        return detectWinDiag(currentBoard);
-    }
-    if (detectDraw(currentBoard) != false) {
-        return detectDraw(currentBoard);
-    }
-    return false;
-}
-
-function detectWinRow(currentBoard) {
-    //loop through rows of currentBoard
-     for (let currentRow of currentBoard) {
-
-        if (currentRow[0] == currentRow[1] & currentRow[0] == currentRow[2]) {
-            console.log("row equal");
-            if (currentRow[0,1,2] == 'X' | currentRow[0,1,2] == 'O') {
-                console.log("Win by row");
-                return currentRow[0];
-            }           
-        }
-     }
-    return false;
-}
-
-function detectWinCol(currentBoard) {
-    for (let i = 0; i < 2; i++) {
-        
-        if (currentBoard[0][i] == currentBoard[1][i] & currentBoard[0][i] == currentBoard[2][i]) {
-            if (currentBoard[0][i] == 'X' | currentBoard[0][i] == 'O') {
-                console.log("Win by column");
-                return currentBoard[0][i];
-            }
-        }
-    }
-    return false;
-}
-
-function detectWinDiag(currentBoard) {
-    //check down and right
-    if (currentBoard[0][0] == currentBoard[1][1] & currentBoard[0][0] == currentBoard[2][2]) {
-        if (currentBoard [0][0] == 'X' | currentBoard [0][0] == 'O') {
-            console.log("Win by diagonal");
-            return currentBoard [0][0];
-        }
-    }
-
-    //check down and left
-    if (currentBoard[0][2] == currentBoard[1][1] & currentBoard [0][2] == currentBoard[2][0]) {
-        if (currentBoard [0][0] == 'X' | currentBoard [0][0] == 'O') {
-        console.log("Win by diagonal");
-        return currentBoard[0][0];
-        }
-    }
-    return false;
-}
-
-function detectDraw(currentBoard) {
-    for (let currentRow of currentBoard) {
-        for (let currentSquare of currentRow) {
-            if (currentSquare == 'X' | currentSquare == 'O') {
-                continue;
-            }
-            else {
-                return false;
-            }
-        }
-    }
-    return 'draw';
-}
 
 function insertAfter(referenceNode, newNode) {
     referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
