@@ -27,6 +27,27 @@ const gameObject = (() => {
         }
         return _turn;
     }
+    function _displayBoard(board) {
+        const boardTable = document.getElementById("board");
+        //cycle through rows
+        for (let row of board) {
+            //create row within board
+            const tableRow = document.createElement("tr");
+            tableRow.setAttribute("rownum", board.indexOf(row));
+            boardTable.appendChild(tableRow);
+            //cycle through columns and create td within row
+            for (let col of row) {
+                const tableCol = document.createElement("td");
+                tableRow.appendChild(tableCol);
+                tableCol.setAttribute("rownum", board.indexOf(row));
+                tableCol.setAttribute("colnum", col);
+                tableCol.addEventListener("click", () => {
+                    addMove(board.indexOf(row),col);
+                });
+    
+            }
+        }
+    }
 
     return {
         newBoard: function() {
@@ -37,6 +58,9 @@ const gameObject = (() => {
         },
         newTurn: function() {
             return _newTurn();
+        },
+        displayBoard: function(board) {
+            return _displayBoard(board);
         }
     }
 })();
@@ -61,7 +85,7 @@ function newGame() {
     //create new board
     currentGame = Object.create(gameObject);
     currentBoard = currentGame.newBoard();
-    displayBoard(currentBoard);
+    currentGame.displayBoard(currentBoard);
     console.log(currentGame.getTurn());
     console.table(currentBoard);
 }
@@ -88,27 +112,7 @@ function addMove(row,col) {
     console.table(currentBoard);
 }
 
-function displayBoard(board) {
-    const boardTable = document.getElementById("board");
-    //cycle through rows
-    for (let row of board) {
-        //create row within board
-        const tableRow = document.createElement("tr");
-        tableRow.setAttribute("rownum", board.indexOf(row));
-        boardTable.appendChild(tableRow);
-        //cycle through columns and create td within row
-        for (let col of row) {
-            const tableCol = document.createElement("td");
-            tableRow.appendChild(tableCol);
-            tableCol.setAttribute("rownum", board.indexOf(row));
-            tableCol.setAttribute("colnum", col);
-            tableCol.addEventListener("click", () => {
-                addMove(board.indexOf(row),col);
-            });
 
-        }
-    }
-}
 
 function updateDisplay(row, col, turn) {
     const selection = document.querySelector(`[rownum='${row}'] [colnum='${col}']`);
