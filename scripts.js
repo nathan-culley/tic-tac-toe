@@ -72,18 +72,23 @@ const gameObject = (() => {
             victoryMessage.setAttribute('id','victory-message');
             victoryMessage.innerHTML = "Victory! " + _detectWin(currentBoard) + " wins.";
             // const resetButton = document.getElementById("reset-button");
-            insertAfter(resetButton, victoryMessage);
+            _insertAfter(resetButton, victoryMessage);
         }
         if (_detectWin(currentBoard) == 'draw') {
             const victoryMessage = document.createElement("p");
             victoryMessage.setAttribute('id','victory-message');
             victoryMessage.innerHTML = "Game is a draw. Play again?";
             // const resetButton = document.getElementById("reset-button");
-            insertAfter(resetButton, victoryMessage);
+            _insertAfter(resetButton, victoryMessage);
         }
 
         
     }
+
+    function _insertAfter(referenceNode, newNode) {
+        referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+    }
+    
     
     function _updateDisplay(row, col, turn) {
         const selection = document.querySelector(`[rownum='${row}'] [colnum='${col}']`);
@@ -224,12 +229,3 @@ function newGame() {
     console.log(currentGame.getTurn());
     console.table(currentBoard);
 }
-
-
-
-
-
-
-function insertAfter(referenceNode, newNode) {
-    referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
-  }
