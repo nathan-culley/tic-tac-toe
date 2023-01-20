@@ -24,6 +24,10 @@ td {
     flex-shrink: 0;
 }
 
+#victory-message {
+    flex-shrink: 0;
+}
+
 #reset-button {
     flex-shrink: 0;
 }

@@ -49,6 +49,10 @@ const gameObject = (() => {
         }
     }
     function _addMove(row,col) {
+        if (_detectWin(currentBoard) != false) {
+            return;
+        }
+        
         if (_detectFill(row, col) == true) {
             alert("Square already taken");
             return;
@@ -68,26 +72,24 @@ const gameObject = (() => {
     function _endGame() {
         
         if (_detectWin(currentBoard) == 'X' | _detectWin(currentBoard) == 'O') {
-            const victoryMessage = document.createElement("p");
-            victoryMessage.setAttribute('id','victory-message');
-            victoryMessage.innerHTML = "Victory! " + _detectWin(currentBoard) + " wins.";
+            console.log(victoryMessage);
+            victoryMessage.textContent = "Victory! " + _detectWin(currentBoard) + " wins.";
             // const resetButton = document.getElementById("reset-button");
-            _insertAfter(resetButton, victoryMessage);
+            //_insertAfter(resetButton, victoryMessage);
         }
         if (_detectWin(currentBoard) == 'draw') {
-            const victoryMessage = document.createElement("p");
-            victoryMessage.setAttribute('id','victory-message');
-            victoryMessage.innerHTML = "Game is a draw. Play again?";
+            console.log(victoryMessage);
+            victoryMessage.textContent = "Game is a draw. Play again?";
             // const resetButton = document.getElementById("reset-button");
-            _insertAfter(resetButton, victoryMessage);
+            //_insertAfter(resetButton, victoryMessage);
         }
 
         
     }
 
-    function _insertAfter(referenceNode, newNode) {
-        referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
-    }
+    // function _insertAfter(referenceNode, newNode) {
+    //     referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+    // }
     
     
     function _updateDisplay(row, col, turn) {
@@ -212,6 +214,8 @@ resetButton.addEventListener("click", () => {
     newGame();
 });
 
+const victoryMessage = document.getElementById("victory-message");
+
 function newGame() {
     //remove currently-displayed table on page
     const boardTable = document.getElementById("board");
@@ -219,9 +223,7 @@ function newGame() {
     while (boardTable.firstChild) {
         boardTable.removeChild(boardTable.firstChild);
     }
-    if (victoryMessage) {
-        victoryMessage.remove();
-    }
+    victoryMessage.textContent = "Send your opponent to Valhalla!"
     //create new board
     currentGame = Object.create(gameObject);
     currentBoard = currentGame.newBoard();
