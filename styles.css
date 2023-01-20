@@ -13,16 +13,17 @@ td {
 
 #game-area {
     border: solid 1px blue;
-    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 #board {
     border: solid 1px red;
-    margin-left: auto;
-    margin-right: auto;
+    flex-shrink: 0;
 }
 
 #reset-button {
-    margin-left: auto;
-    margin-right: auto;
+    flex-shrink: 0;
 }
