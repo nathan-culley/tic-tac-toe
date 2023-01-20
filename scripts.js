@@ -56,7 +56,7 @@ const gameObject = (() => {
     
         currentBoard[row][col] = currentGame.getTurn();
     
-        updateDisplay(row, col, currentGame.getTurn());
+        _updateDisplay(row, col, currentGame.getTurn());
         currentGame.newTurn();
     
         if (detectWin(currentBoard) != false) {
@@ -68,6 +68,11 @@ const gameObject = (() => {
         }
         
         console.table(currentBoard);
+    }
+    function _updateDisplay(row, col, turn) {
+        const selection = document.querySelector(`[rownum='${row}'] [colnum='${col}']`);
+        console.log(selection);
+        selection.innerHTML = turn;
     }
 
     return {
@@ -115,11 +120,7 @@ function newGame() {
 
 
 
-function updateDisplay(row, col, turn) {
-    const selection = document.querySelector(`[rownum='${row}'] [colnum='${col}']`);
-    console.log(selection);
-    selection.innerHTML = turn;
-}
+
 
 function detectFill(row,col) {
     if (currentBoard[row][col] == "X" | currentBoard[row][col] == "O") {
