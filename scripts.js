@@ -60,15 +60,31 @@ const gameObject = (() => {
         currentGame.newTurn();
     
         if (detectWin(currentBoard) != false) {
+            _endGame();
+        }
+        
+        console.table(currentBoard);
+    }
+    function _endGame() {
+        
+        if (detectWin(currentBoard) == 'X' | detectWin(currentBoard) == 'O') {
             const victoryMessage = document.createElement("p");
             victoryMessage.setAttribute('id','victory-message');
             victoryMessage.innerHTML = "Victory! " + detectWin(currentBoard) + " wins.";
             // const resetButton = document.getElementById("reset-button");
             insertAfter(resetButton, victoryMessage);
         }
+        if (detectWin(currentBoard) == 'draw') {
+            const victoryMessage = document.createElement("p");
+            victoryMessage.setAttribute('id','victory-message');
+            victoryMessage.innerHTML = "Game is a draw. Play again?";
+            // const resetButton = document.getElementById("reset-button");
+            insertAfter(resetButton, victoryMessage);
+        }
+
         
-        console.table(currentBoard);
     }
+    
     function _updateDisplay(row, col, turn) {
         const selection = document.querySelector(`[rownum='${row}'] [colnum='${col}']`);
         console.log(selection);
@@ -145,7 +161,9 @@ function detectWin(currentBoard) {
     if (detectWinDiag(currentBoard) != false) {
         return detectWinDiag(currentBoard);
     }
-
+    if (detectDraw(currentBoard) != false) {
+        return detectDraw(currentBoard);
+    }
     return false;
 }
 
@@ -194,6 +212,20 @@ function detectWinDiag(currentBoard) {
         }
     }
     return false;
+}
+
+function detectDraw(currentBoard) {
+    for (let currentRow of currentBoard) {
+        for (let currentSquare of currentRow) {
+            if (currentSquare == 'X' | currentSquare == 'O') {
+                continue;
+            }
+            else {
+                return false;
+            }
+        }
+    }
+    return 'draw';
 }
 
 function insertAfter(referenceNode, newNode) {
