@@ -19,6 +19,23 @@ td {
     align-items: center;
 }
 
+#board-names {
+    display: flex;
+    flex-direction: row;
+}
+
+.label-input {
+    align-self: center;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.player-name {
+    height: 20px;
+    
+}
+
 #board {
     border: solid 1px red;
     flex-shrink: 0;

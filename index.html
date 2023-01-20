@@ -11,8 +11,20 @@
     
     <div id="game-area">
         <h1 id="game-title">Tic-Tac-Todin</h1>
-        <table id="board">
-        </table>
+        <div id="board-names">
+            <div class="label-input">
+                <label for="player-x">Player One (X)</label>
+                <input class="player-name" type="text" id="player-x">
+                <button type="submit">Submit Name</button>
+            </div>
+            <table id="board">
+            </table>
+            <div class="label-input">
+                <label for="player-o">Player Two (O)</label>
+                <input class="player-name" type="text" id="player-o">
+                <button type="submit">Submit Name</button>
+            </div>
+        </div>
         <br>
         <button id="reset-button">Reset Game</button>
         <h4 id="victory-message"></h4>
