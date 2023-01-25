@@ -71,11 +71,13 @@ const gameObject = (() => {
     }
     function _endGame() {
         
-        if (_detectWin(currentBoard) == 'X' | _detectWin(currentBoard) == 'O') {
+        if (_detectWin(currentBoard) == 'X') {
             console.log(victoryMessage);
-            victoryMessage.textContent = "Victory! " + _detectWin(currentBoard) + " wins.";
-            // const resetButton = document.getElementById("reset-button");
-            //_insertAfter(resetButton, victoryMessage);
+            victoryMessage.textContent = "Victory! " + playerX + " wins.";
+        }
+        if (_detectWin(currentBoard) == 'O') {
+            console.log(victoryMessage);
+            victoryMessage.textContent = "Victory! " + playerO + " wins.";
         }
         if (_detectWin(currentBoard) == 'draw') {
             console.log(victoryMessage);
@@ -208,6 +210,22 @@ const gameObject = (() => {
 })();
 
 newGame();
+
+let playerX;
+let playerO;
+
+const nameButtonX = document.getElementById("submit-x");
+const nameButtonO = document.getElementById("submit-o");
+
+nameButtonX.addEventListener("click", () => {
+    playerX = document.getElementById("player-x").value;
+    console.log(playerX);
+});
+
+nameButtonO.addEventListener("click", () => {
+    playerO = document.getElementById("player-o").value;
+    console.log(playerO);
+});
 
 const resetButton = document.getElementById("reset-button");
 resetButton.addEventListener("click", () => {
