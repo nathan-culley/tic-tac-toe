@@ -148,7 +148,7 @@ const gameObject = (() => {
     }
     
     function _detectWinCol(currentBoard) {
-        for (let i = 0; i < 2; i++) {
+        for (let i = 0; i <= 2; i++) {
             
             if (currentBoard[0][i] == currentBoard[1][i] & currentBoard[0][i] == currentBoard[2][i]) {
                 if (currentBoard[0][i] == 'X' | currentBoard[0][i] == 'O') {
@@ -171,9 +171,9 @@ const gameObject = (() => {
     
         //check down and left
         if (currentBoard[0][2] == currentBoard[1][1] & currentBoard [0][2] == currentBoard[2][0]) {
-            if (currentBoard [0][0] == 'X' | currentBoard [0][0] == 'O') {
+            if (currentBoard [0][2] == 'X' | currentBoard [0][2] == 'O') {
             console.log("Win by diagonal");
-            return currentBoard[0][0];
+            return currentBoard[0][2];
             }
         }
         return false;
